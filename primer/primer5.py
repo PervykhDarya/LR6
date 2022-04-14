@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-
 import argparse
 import json
 import os
@@ -47,7 +45,6 @@ def display_workers(staff):
         )
         print(line)
         # Вывести данные о всех сотрудниках.
-
         for idx, worker in enumerate(staff, 1):
             print(
                 '| {:>4} | {:<30} | {:<20} | {:>8} |'.format(
@@ -167,6 +164,7 @@ def main(command_line=None):
     # Получить имя файла.
     data_file = args.data
     if not data_file:
+        os.environ.setdefault('WORKERS_DATA', 'd.json')
         data_file = os.environ.get("WORKERS_DATA")
     if not data_file:
         print("The data file name is absent", file=sys.stderr)
@@ -196,7 +194,6 @@ def main(command_line=None):
     # Сохранить данные в файл, если список работников был изменен.
     if is_dirty:
         save_workers(data_file, workers)
-        os.environ.setdefault('WORKERS_DATA', data_file)
 
 
 if __name__ == "__main__":
